@@ -27,6 +27,10 @@ public class Critter {
         return hasWon;
     }
 
+    public void win() {
+        hasWon = true;
+    }
+
     public boolean isAlive() {
         return isAlive;
     }
@@ -39,6 +43,15 @@ public class Critter {
         System.out.println(Name + " sleeps.");
         tiredness = 0;
         foodLevel -= 3;
+        try {
+            for (int i = 1; i < 6; i++) {
+                System.out.println("Zzz...");
+                Thread.sleep(1000);
+            }
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
         if (foodLevel <= 0) {
             System.out.println(Name + " starves to death.");
             die();
@@ -50,6 +63,7 @@ public class Critter {
             System.out.println(Name + " eats.");
             foodLevel++;
             tiredness++;
+            fitnessLevel--;
             if (foodLevel > 10) {
                 System.out.println(Name + " over ate.");
                 die();
@@ -67,6 +81,11 @@ public class Critter {
             fitnessLevel++;
             tiredness--;
             foodLevel -= 2;
+            if (fitnessLevel > 10) {
+                System.out.println(Name + " is the peak form of fitness and athleticism." +
+                        " Meanwhile, you can fitness dick in your mouth.");
+                win();
+            }
         }
     }
 }
